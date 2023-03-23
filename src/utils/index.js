@@ -61,3 +61,9 @@ export async function updateComponent(callback, fileName = '') {
     fs.writeFileSync(file, updatedComponent)
   })
 }
+
+export function getTranslationsFromJson(filePath) {
+  const content = getFileContent(filePath)
+  const parsedContent = parseContent(content, filePath)
+  return parsedContent
+}
