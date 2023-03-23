@@ -67,3 +67,21 @@ export function getTranslationsFromJson(filePath) {
   const parsedContent = parseContent(content, filePath)
   return parsedContent
 }
+
+export async function getTranslationsFromComponents(
+  componentName = '',
+  dir = 'src/components'
+) {
+  const files = await getAllComponents(componentName, dir)
+  const contentsByFile = {}
+
+  for (const file of files) {
+    const content = getLocaleTagContent(file)
+    if (!content) {
+      console.log(`It cannot found any locale tag in '${file} file'`)
+    }
+    contentsByFile[file] = content
+  }
+
+  return contentsByFile
+}
