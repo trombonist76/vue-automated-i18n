@@ -2,52 +2,55 @@ import { parse } from '@vue/compiler-sfc'
 import glob from 'glob'
 import fs from 'fs'
 
-function getFileContent (file) {
+function getFileContent(file) {
   return fs.readFileSync(file).toString()
 }
 
-function parseContent (content, file = '') {
-	try {
+function parseContent(content, file = '') {
+  try {
     return JSON.parse(content)
   } catch (err) {
-		throw Error(`An error occured when the ${file} parsing locale tag content`)
+    throw Error(`An error occured when the ${file} parsing locale tag content`)
   }
 }
 
-function getLocaleTagContent (file, fileContent = '', tagType = 'i18n') {
+function getLocaleTagContent(file, fileContent = '', tagType = 'i18n') {
   if (file && !fileContent) {
     fileContent = getFileContent(file)
   }
   const component = parse(fileContent)
   const customBlocks = component.descriptor.customBlocks
-  const localeTag = customBlocks.find(blocks => blocks.type === tagType)
+  const localeTag = customBlocks.find((blocks) => blocks.type === tagType)
 
-	if (!localeTag) return false
+  if (!localeTag) return false
 
-	return parseContent(localeTag.content, file)
+  return parseContent(localeTag.content, file)
 }
 
-function replaceOldLocales (file, updatedLocales, tagType = 'i18n') {
+function replaceOldLocales(file, updatedLocales, tagType = 'i18n') {
   const pattern = /<i18n>(.*?)<\/i18n>/gs
   const content = getFileContent(file)
   const updatedContent = JSON.stringify(updatedLocales, null, 2)
-  const newContent = content.replace(pattern, `<${tagType}>\n${updatedContent}\n</${tagType}>`)
+  const newContent = content.replace(
+    pattern,
+    `<${tagType}>\n${updatedContent}\n</${tagType}>`
+  )
 
   return newContent
 }
 
-async function getAllComponents (fileName, directory = 'src/components') {
+async function getAllComponents(fileName, directory = 'src/components') {
   const path = `${directory}/${fileName || '*'}.vue`
-	const components = await glob(path)
-	return components
+  const components = await glob(path)
+  return components
 }
 
-export async function updateComponent (callback, fileName = '') {
+export async function updateComponent(callback, fileName = '') {
   const files = await getAllComponents(fileName)
-  files.forEach(file => {
+  files.forEach((file) => {
     console.log(`The file '${file}' is reading now.`)
-    
-		const localeTagContent = getLocaleTagContent(file)
+
+    const localeTagContent = getLocaleTagContent(file)
     if (!localeTagContent) {
       console.log(`It cannot found any locale tag in '${file} file'`)
       return

@@ -1,7 +1,7 @@
-import yargs from "yargs"
-import { updateComponent } from "../utils/index.js"
+import yargs from 'yargs'
+import { updateComponent } from '../utils/index.js'
 
-function addNewFieldToLangs (tagContent, fieldName, value = '') {
+function addNewFieldToLangs(tagContent, fieldName, value = '') {
   const updatedContent = { ...tagContent }
   Object.entries(updatedContent).map(([lang, fields]) => {
     updatedContent[lang] = { ...fields, [fieldName]: value }
@@ -27,13 +27,14 @@ yargs.command({
     fieldValue: {
       alias: 'v',
       describe: 'Field value.',
-      demandOption: true,
+      demandOption: true
     }
   },
   handler: (argv) => {
     const { fieldName, fieldValue, component } = argv
 
-    const updatedContent = content => addNewFieldToLangs(content, fieldName, fieldValue)
+    const updatedContent = (content) =>
+      addNewFieldToLangs(content, fieldName, fieldValue)
     updateComponent(updatedContent, component)
   }
 })
@@ -52,14 +53,15 @@ yargs.command({
       describe: 'Field value.',
       demandOption: true
     },
-		dir: {
+    dir: {
       alias: 'd',
-      describe: 'Components directory to add new field their locales',
-    },
+      describe: 'Components directory to add new field their locales'
+    }
   },
   handler: async (argv) => {
     const { fieldName, fieldValue, dir } = argv
-    const updatedContent = content => addNewFieldToLangs(content, fieldName, fieldValue)
+    const updatedContent = (content) =>
+      addNewFieldToLangs(content, fieldName, fieldValue)
     await updateComponent(updatedContent, dir)
   }
 })
