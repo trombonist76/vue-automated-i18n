@@ -1,0 +1,25 @@
+{
+  "name": "vue-automated-i18n",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "add-field": "node commands/addNewField.js add-field",
+    "add-field-all": "node commands/addNewField.js add-field-all",
+    "add-locale": "node commands/addNewLocale.js add-locale",
+    "import": "node commands/importLocales.js import",
+    "export": "node commands/exportLocales.js export"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.47"
+  },
+  "dependencies": {
+    "glob": "^9.3.1",
+    "yargs": "^13.3.0"
+  }
+}
