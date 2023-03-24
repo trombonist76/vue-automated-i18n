@@ -6,11 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "add-field": "node commands/addNewField.js add-field",
-    "add-field-all": "node commands/addNewField.js add-field-all",
-    "add-locale": "node commands/addNewLocale.js add-locale",
-    "import": "node commands/importLocales.js import",
-    "export": "node commands/exportLocales.js export",
+    "add-field": "node src/commands/addNewField.js add-field",
+    "add-field-all": "node src/commands/addNewField.js add-field-all",
+    "add-locale": "node src/commands/addNewLocale.js add-locale",
+    "import": "node src/commands/importLocales.js import",
+    "export": "node src/commands/exportLocales.js export",
     "prepare": "husky install"
   },
   "keywords": [],
