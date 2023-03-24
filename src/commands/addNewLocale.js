@@ -30,12 +30,12 @@ yargs.command({
       describe: 'Components directory to add new locale.'
     }
   },
-  handler: (argv) => {
+  handler: async (argv) => {
     const { localeKey, extendKey, dir } = argv
 
     const updatedContent = (content) =>
       addNewLocale(content, localeKey, extendKey)
-    updateComponent(updatedContent, dir)
+    await updateComponent(updatedContent, dir)
   }
 })
 

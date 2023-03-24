@@ -96,10 +96,7 @@ export function generateNestedObjFromStr(dottedString, value, baseObj) {
 	*/
   const splittedFieldNames = dottedString.split('.')
   let localObj = baseObj //holding same refference
-  console.log('baseObj,', baseObj)
   splittedFieldNames.forEach((field, index) => {
-    console.log('field,', field)
-    console.log('localObj[field]', localObj[field])
     localObj[field] = localObj[field] || {}
     if (splittedFieldNames.length - 1 === index) {
       localObj[field] = value
