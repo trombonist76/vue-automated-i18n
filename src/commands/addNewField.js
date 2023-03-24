@@ -1,13 +1,25 @@
 import yargs from 'yargs'
-import { updateComponent } from '../utils/index.js'
+import { updateComponent, generateNestedObjFromStr } from '../utils/index.js'
 
 function addNewFieldToLangs(tagContent, fieldName, value = '') {
-  const updatedContent = { ...tagContent }
-  Object.entries(updatedContent).map(([lang, fields]) => {
-    updatedContent[lang] = { ...fields, [fieldName]: value }
-  })
+  const updatingContent = { ...tagContent }
+  const contentEntries = Object.entries(updatingContent)
+  const isFieldNested = fieldName.includes('.')
 
-  return updatedContent
+  for (const [lang, fields] of contentEntries) {
+    if (isFieldNested) {
+      const nestedObj = generateNestedObjFromStr(
+        fieldName,
+        value,
+        updatingContent[lang]
+      )
+      updatingContent[lang] = { ...fields, ...nestedObj }
+      continue
+    }
+    updatingContent[lang] = { ...fields, [fieldName]: value }
+  }
+
+  return updatingContent
 }
 
 yargs.command({
