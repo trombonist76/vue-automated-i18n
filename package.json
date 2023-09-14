@@ -1,9 +1,17 @@
 {
   "name": "vue-automated-i18n",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.1.0",
+  "description": "Automates i18n processes; importing, exporting translations and adding new locales or fields etc.",
+  "homepage": "https://github.com/trombonist76/vue-automated-i18n",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "add-locale": "src/commands/addNewLocale.js",
+    "add-field": "src/commands/addNewField.js",
+    "add-field-all": "src/commands/addNewField.js",
+    "export-locales": "src/commands/exportLocales.js",
+    "import-locales": "src/commands/importLocales.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "add-field": "node src/commands/addNewField.js add-field",
@@ -13,17 +21,25 @@
     "export-locales": "node src/commands/exportLocales.js export",
     "prepare": "husky install"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "i18n",
+    "locale",
+    "vue-i18n",
+    "vue",
+    "localization",
+    "i18n-vue",
+    "translation"
+  ],
+  "author": "trombonist76",
   "license": "ISC",
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.2.47",
     "husky": "^8.0.0",
     "prettier": "^2.8.6",
     "pretty-quick": "^3.1.3"
   },
   "dependencies": {
-    "glob": "^9.3.1",
-    "yargs": "^13.3.0"
+    "@vue/compiler-sfc": "^3.3.4",
+    "glob": "^10.3.4",
+    "yargs": "^17.7.2"
   }
 }
