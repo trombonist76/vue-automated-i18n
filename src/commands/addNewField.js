@@ -1,4 +1,7 @@
+#!/usr/bin/env node
+
 import yargs from 'yargs'
+import { hideBin } from 'yargs/helpers'
 import { updateComponent, generateNestedObjFromStr } from '../utils/index.js'
 
 function addNewFieldToLangs(tagContent, fieldName, value = '') {
@@ -22,61 +25,68 @@ function addNewFieldToLangs(tagContent, fieldName, value = '') {
   return updatingContent
 }
 
-yargs.command({
-  command: 'add-field',
-  describe: 'Add field to component locales',
-  builder: {
-    component: {
-      alias: 'c',
-      describe: 'Component name.',
-      demandOption: true
+yargs(hideBin(process.argv))
+  .command({
+    command: 'add-field',
+    describe: 'Add field to component locales',
+    builder: {
+      component: {
+        alias: 'c',
+        describe: 'Component name.',
+        demandOption: true
+      },
+      fieldName: {
+        alias: 'f',
+        describe: 'Field name which added to each locale.',
+        demandOption: true
+      },
+      fieldValue: {
+        alias: 'v',
+        describe: 'Field value.',
+        demandOption: true
+      },
+      dir: {
+        alias: 'd',
+        describe: 'Component directory'
+      }
     },
-    fieldName: {
-      alias: 'f',
-      describe: 'Field name which added to each locale.',
-      demandOption: true
-    },
-    fieldValue: {
-      alias: 'v',
-      describe: 'Field value.',
-      demandOption: true
+    handler: (argv) => {
+      const { fieldName, fieldValue, component, dir } = argv
+
+      const updatedContent = (content) =>
+        addNewFieldToLangs(content, fieldName, fieldValue)
+      updateComponent(updatedContent, component, dir)
     }
-  },
-  handler: (argv) => {
-    const { fieldName, fieldValue, component } = argv
+  })
+  .help()
+  .parse()
 
-    const updatedContent = (content) =>
-      addNewFieldToLangs(content, fieldName, fieldValue)
-    updateComponent(updatedContent, component)
-  }
-})
-
-yargs.command({
-  command: 'add-field-all',
-  describe: 'Add field to all component locales',
-  builder: {
-    fieldName: {
-      alias: 'f',
-      describe: 'Field name which added to each locale.',
-      demandOption: true
+yargs(hideBin(process.argv))
+  .command({
+    command: 'add-field-all',
+    describe: 'Add field to all component locales',
+    builder: {
+      fieldName: {
+        alias: 'f',
+        describe: 'Field name which added to each locale.',
+        demandOption: true
+      },
+      fieldValue: {
+        alias: 'v',
+        describe: 'Field value.',
+        demandOption: true
+      },
+      dir: {
+        alias: 'd',
+        describe: 'Components directory to add new field their locales'
+      }
     },
-    fieldValue: {
-      alias: 'v',
-      describe: 'Field value.',
-      demandOption: true
-    },
-    dir: {
-      alias: 'd',
-      describe: 'Components directory to add new field their locales'
+    handler: async (argv) => {
+      const { fieldName, fieldValue, dir } = argv
+      const updatedContent = (content) =>
+        addNewFieldToLangs(content, fieldName, fieldValue)
+      await updateComponent(updatedContent, '', dir)
     }
-  },
-  handler: async (argv) => {
-    const { fieldName, fieldValue, dir } = argv
-    const updatedContent = (content) =>
-      addNewFieldToLangs(content, fieldName, fieldValue)
-    await updateComponent(updatedContent, dir)
-  }
-})
-
-yargs.help()
-yargs.parse()
+  })
+  .help()
+  .parse()

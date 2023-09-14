@@ -36,6 +36,8 @@ yarn
 
 > Shorthand **`yarn add-locale -l az -e tr`**
 
+> npx **`npx -p vue-automated-i18n add-locale add-locale -l az -e tr -d src/components`**
+
 | Builder Opts.  | Alias      | Default		  		  | Required	|	Example 			 | Description 																							                            |
 | -------------- | --------   | ----------------- | --------- | -------------- | ------------------------------------------------------------------------------------ |
 | localeKey      | `-l`       | `none`            | `true`    |  tr            | New locale option to be added to the component.                                      |
@@ -50,17 +52,20 @@ NOTE: You can add nested fields with using (.) dot. Ex: this.is.nested `{ this: 
 
 > Script: **`yarn add-field`** 
 
-> Example: **`yarn add-field --component Button --fieldName submit --fieldValue OK`**
+> Example: **`yarn add-field --component Button --fieldName submit --fieldValue OK -d src/components``**
 
 > Nested - Example: **`yarn add-field --component Header --fieldName title.header --fieldValue "Header Title"`**
 
 > Shorthand **`yarn add-field -c Button -f submit -v OK`**
+
+> npx **`npx -p vue-automated-i18n add-field add-field -f submit -v OK -d src/components`**
 
 | Builder Opts.  | Alias      | Default		  		  | Required	|	Example 			 | Description 																							                            |
 | -------------- | --------   | ----------------- | --------- | -------------- | ------------------------------------------------------------------------------------ |
 | component      | `-c`       | `none`            | `true`    |  Button        | The component name, without the '.vue', to which a new field will be added.          |
 | fieldName      | `-f`       | `none`            | `true`    |  newField      | The field name to be added to component as a object key.                             |
 | fieldValue     | `-v`       | `none`            | `true`    |  hi, im value  | The field value of the new field to be added to component as a object value.         |
+| dir     | `-d`       | `src/components`            | `false`    |  src/components/Modal  | The component directory that will be added to new field.         |
 
 ![Add Field](gifs/add-field.gif "Add Field")
 
@@ -76,6 +81,8 @@ NOTE: You can add nested fields with using (.) dot. Ex: this.is.nested `{ this: 
 > Nested - Example: **`yarn add-field-all --fieldName title.header --fieldValue "Header Title" --dir src/components`**
 
 > Shorthand **`yarn add-field-all -f submit -v OK -d src/components`**
+
+> npx **`npx -p vue-automated-i18n add-field-all add-field-all -f submit -v OK -d src/components`**
 
 | Builder Opts.  | Alias      | Default		  		  | Required	|	Example 			 | Description 																							                            |
 | -------------- | --------   | ----------------- | --------- | -------------- | ------------------------------------------------------------------------------------ |
@@ -117,6 +124,8 @@ NOTE: The JSON file must be like this:
 
 > Shorthand **`yarn import-locales -p src/imports/locales.json -d src/components`**
 
+> npx **`npx -p vue-automated-i18n import-locales import-locales -p src/imports/locales.json -d src/components`**
+
 | Builder Opts.  | Alias      | Default		  		  | Required	|	Example 			            | Description 																							                           |
 | -------------- | --------   | ----------------- | --------- | ------------------------- | ------------------------------------------------------------------------------------ |
 | importFilePath | `-p`       | `none`            | `true`    |  import/locales.json      | The path of JSON file to be imported its translations to components.                 |
@@ -132,11 +141,14 @@ NOTE: The JSON file must be like this:
 
 > Shorthand **`yarn export-locales -p src/exports/locales.json -d src/components`**
 
+> npx **`npx -p vue-automated-i18n export-locales export-locales -p src/exports/locales.json -d src/components`**
+
 | Builder Opts.  | Alias      | Default		  		    | Required	|	Example 			         | Description 																						                              |
 | -------------- | --------   | -----------------   | --------- | ---------------------- | ------------------------------------------------------------------------------------ |
 | exportFilePath | `-p`       | `translations.json` | `false`   | export/locales.json    | The path of JSON file to be exported components translations.                        |
 | dir            | `-d`       | `src/components`    | `false`   | src/views              | The components directory or path that will be added to locales from JSON.            |
 | component      | `-c`       | `none`              | `false`   | Header         | The specific component name, without the '.vue', to which its translations will be exported. |
+| nested | `-n` | `true` | `false` | boolean ex: `false` | Search components in nested folder structure. |
 
 
 ![Export Locales](gifs/export-locales.gif "Export Locales")

@@ -1,5 +1,5 @@
 import { parse } from '@vue/compiler-sfc'
-import glob from 'glob'
+import { glob } from 'glob'
 import fs from 'fs'
 
 function getFileContent(file) {
@@ -28,31 +28,41 @@ function getLocaleTagContent(file, fileContent = '', tagType = 'i18n') {
 }
 
 function replaceOldLocales(file, updatedLocales, tagType = 'i18n') {
-  const pattern = /<i18n>(.*?)<\/i18n>/gs
+  const pattern = /<i18n([^>]*)>(.*?)<\/i18n>/gs
   const content = getFileContent(file)
   const updatedContent = JSON.stringify(updatedLocales, null, 2)
-  const newContent = content.replace(
-    pattern,
-    `<${tagType}>\n${updatedContent}\n</${tagType}>`
-  )
-
+  const newContent = content.replace(pattern, (_, attrs) => {
+    return `<${tagType}${attrs}>\n${updatedContent}\n</${tagType}>`
+  })
   return newContent
 }
 
-async function getAllComponents(fileName, directory = 'src/components') {
-  const path = `${directory}/${fileName || '*'}.vue`
+async function getAllComponents(
+  fileName,
+  directory = 'src/components',
+  nested = true
+) {
+  const path = nested
+    ? `${directory}/**/${fileName || '*'}.vue`
+    : `${directory}/${fileName || '*'}.vue`
+
   const components = await glob(path)
   return components
 }
 
-export async function updateComponent(callback, fileName = '') {
-  const files = await getAllComponents(fileName)
+export async function updateComponent(
+  callback,
+  fileName = '',
+  directory = 'src/components'
+) {
+  const files = await getAllComponents(fileName, directory)
+  console.log('files', files)
   files.forEach((file) => {
     console.log(`The file '${file}' is reading now.`)
 
     const localeTagContent = getLocaleTagContent(file)
     if (!localeTagContent) {
-      console.log(`It cannot found any locale tag in '${file} file'`)
+      console.log(`It cannot found any locale tag in '${file} file' \n`)
       return
     }
 
@@ -70,9 +80,10 @@ export function getTranslationsFromJson(filePath) {
 
 export async function getTranslationsFromComponents(
   componentName = '',
-  dir = 'src/components'
+  dir = 'src/components',
+  nested = true
 ) {
-  const files = await getAllComponents(componentName, dir)
+  const files = await getAllComponents(componentName, dir, nested)
   const contentsByFile = {}
 
   for (const file of files) {
