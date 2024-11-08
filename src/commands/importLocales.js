@@ -2,29 +2,28 @@
 
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { updateComponent, getTranslationsFromJson } from '../utils/index.js'
+import { input } from '@inquirer/prompts'
+
+import { getTranslationsFromJson } from '../utils/import.js'
+import { getBuilder } from '../builders/importLocales.js'
+import { updateComponent } from '../utils/component.js'
 
 yargs(hideBin(process.argv))
   .command({
     command: 'import-locales',
     describe:
       'Import translations from given Json file and update components locales',
-    builder: {
-      importFilePath: {
-        alias: 'p',
-        describe: 'Json file path to import locales',
-        demandOption: true
-      },
-      dir: {
-        alias: 'd',
-        describe: 'Components directory to add imported locales.'
-      }
-    },
     handler: async (argv) => {
-      const { importFilePath, dir } = argv
-      const jsonContent = getTranslationsFromJson(importFilePath)
+      const BUILDER = getBuilder()
+
+      const importFilePath = await input(BUILDER.importFilePath)
+
+      const jsonContent = await getTranslationsFromJson(importFilePath)
       const executor = (_, file) => jsonContent[file]
-      await updateComponent(executor, dir)
+
+      Object.keys(jsonContent).forEach(async (filePath) => {
+        await updateComponent(filePath, executor)
+      })
     }
   })
   .help()

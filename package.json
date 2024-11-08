@@ -6,19 +6,23 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "add-locale": "src/commands/addNewLocale.js",
-    "add-field": "src/commands/addNewField.js",
-    "add-field-all": "src/commands/addNewField.js",
+    "add-field": "src/commands/addField.js",
+    "add-field-global": "src/commands/addFieldGlobal.js",
+    "add-field-all": "src/commands/addFieldAll.js",
+    "add-locale": "src/commands/addLocale.js",
     "export-locales": "src/commands/exportLocales.js",
-    "import-locales": "src/commands/importLocales.js"
+    "import-locales": "src/commands/importLocales.js",
+    "import-single-locale": "src/commands/importSingleLocale"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "add-field": "node src/commands/addNewField.js add-field",
-    "add-field-all": "node src/commands/addNewField.js add-field-all",
-    "add-locale": "node src/commands/addNewLocale.js add-locale",
-    "import-locales": "node src/commands/importLocales.js import",
-    "export-locales": "node src/commands/exportLocales.js export",
+    "add-field": "node src/commands/addField.js add-field",
+    "add-field-global": "node src/commands/addFieldGlobal.js add-field-global",
+    "add-field-all": "node src/commands/addFieldAll.js add-field-all",
+    "add-locale": "node src/commands/addLocale.js add-locale",
+    "import-locales": "node src/commands/importLocales.js import-locales",
+    "export-locales": "node src/commands/exportLocales.js export-locales",
+    "import-single-locale": "node src/commands/importSingleLocale import-single-locale",
     "prepare": "husky install"
   },
   "keywords": [
@@ -38,6 +42,7 @@
     "pretty-quick": "^3.1.3"
   },
   "dependencies": {
+    "@inquirer/prompts": "^7.0.1",
     "@vue/compiler-sfc": "^3.3.4",
     "glob": "^10.3.4",
     "yargs": "^17.7.2"
