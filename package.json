@@ -12,7 +12,8 @@
     "add-locale": "src/commands/addLocale.js",
     "export-locales": "src/commands/exportLocales.js",
     "import-locales": "src/commands/importLocales.js",
-    "import-single-locale": "src/commands/importSingleLocale"
+    "import-single-locale": "src/commands/importSingleLocale.js",
+    "compare": "src/commands/compare.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,7 +23,8 @@
     "add-locale": "node src/commands/addLocale.js add-locale",
     "import-locales": "node src/commands/importLocales.js import-locales",
     "export-locales": "node src/commands/exportLocales.js export-locales",
-    "import-single-locale": "node src/commands/importSingleLocale import-single-locale",
+    "import-single-locale": "node src/commands/importSingleLocale.js import-single-locale",
+    "compare": "node src/commands/compare.js compare",
     "prepare": "husky install"
   },
   "keywords": [

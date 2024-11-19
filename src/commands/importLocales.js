@@ -15,7 +15,6 @@ yargs(hideBin(process.argv))
     describe:
       'Import translations from given Json file and update components locales',
     handler: async (argv) => {
-      validateTranslations(currentTranslations, newTranslations)
       const BUILDER = getBuilder()
 
       const importFilePath = await input(BUILDER.importFilePath)
