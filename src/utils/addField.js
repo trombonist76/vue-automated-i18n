@@ -20,3 +20,14 @@ export function addFieldToLangs(localeTagContent, fieldName, fieldValue = '') {
   }
   return updatingContent
 }
+
+export function addFieldsToLangs(localeTagContent, fields) {
+  let content = localeTagContent
+
+  Object.entries(fields).forEach((field) => {
+    const [fieldKey, fieldValue] = field
+    content = addFieldToLangs(content, fieldKey, fieldValue)
+  })
+
+  return content
+}
