@@ -26,7 +26,10 @@ export function getLocaleTagContent(file, fileContent = '', tagType = 'i18n') {
   const customBlocks = component.descriptor.customBlocks
   const localeTag = customBlocks.find((blocks) => blocks.type === tagType)
 
-  if (!localeTag) return false
+  if (!localeTag) {
+    console.log(`It cannot found any locale tag in '${filePath} file' \n`)
+    return false
+  }
 
   return parseContent(localeTag.content, file)
 }

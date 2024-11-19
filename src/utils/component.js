@@ -15,10 +15,7 @@ export function updateComponent(filePath, callback) {
   console.log(`The file '${filePath}' is reading now.`)
 
   const localeTagContent = getLocaleTagContent(filePath)
-  if (!localeTagContent) {
-    console.log(`It cannot found any locale tag in '${filePath} file' \n`)
-    return
-  }
+  if (!localeTagContent) return
 
   const updatedContent = callback(localeTagContent, filePath)
   const updatedComponent = replaceOldLocales(filePath, updatedContent)
