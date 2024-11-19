@@ -1,6 +1,4 @@
-function isObject(item) {
-  return item && typeof item === 'object' && !Array.isArray(item)
-}
+import { isObject } from './typeChecker.js'
 
 export function deepMerge(target, ...sources) {
   if (!sources.length) return target
