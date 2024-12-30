@@ -1,16 +1,15 @@
-export function getBuilder() {
-  return {
-    importFilePath: {
-      message: 'Json file path to import locales',
-      default: './translations.json'
-    },
-    newLocaleKey: {
-      message: 'New locale key',
-      required: true
-    },
-    fallbackLocaleKey: {
-      message: 'Fallback locale key',
-      required: false
-    }
+export const BUILDER = {
+  importFilePath: {
+    message: 'Çevirilerin import edileceği json dosyasının yolu',
+    default: './translations.json'
+  },
+  newLocaleKey: {
+    message: 'Çeviri dosyasındaki hangi locale key import edilecek?',
+    required: true
+  },
+  fallbackLocaleKey: {
+    message:
+      'Çeviri dosyasındaki hangi locale key fallback olarak kullanılacak?',
+    required: false
   }
 }

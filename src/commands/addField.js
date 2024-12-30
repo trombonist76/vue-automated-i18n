@@ -1,37 +1,40 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
-import { confirm, input } from '@inquirer/prompts'
+import { input } from '@inquirer/prompts'
 import { hideBin } from 'yargs/helpers'
-import { getBuilder } from '../builders/addField.js'
+
+import { BUILDER } from '../builders/addField.js'
 import { updateComponents } from '../utils/component.js'
-import { addFieldsToLangs } from '../utils/addField.js'
+import {
+  addFieldToSpecificLocales,
+  generateOptionsFromLocaleKeys,
+  getFields
+} from '../utils/addField.js'
 
 yargs(hideBin(process.argv))
   .command({
-    command: 'add-field',
+    command: '*',
     describe: 'Add field to component locales',
     handler: async (argv) => {
-      const BUILDER = getBuilder()
-
       const dir = await input(BUILDER.dir)
       const componentName = await input(BUILDER.componentName)
+      const locales = await generateOptionsFromLocaleKeys(dir, componentName)
+      const fields = await getFields(locales)
 
-      async function getFields() {
-        const fieldName = await input(BUILDER.fieldName)
-        const fieldValue = await input(BUILDER.fieldValue)
-        const addAnotherField = await confirm({
-          message: 'Add another field',
-          default: false
+      const updatedContent = (content) => {
+        Object.entries(fields).forEach(([fieldName, fieldValues]) => {
+          fieldValues.forEach(({ fieldValue, selectedLocales }) => {
+            content = addFieldToSpecificLocales(
+              content,
+              selectedLocales,
+              fieldName,
+              fieldValue
+            )
+          })
         })
 
-        const fields = { [fieldName]: fieldValue }
-        if (!addAnotherField) return fields
-        const otherFields = await getFields()
-        return Object.assign({}, fields, otherFields)
+        return content
       }
-
-      const fields = await getFields()
-      const updatedContent = (content) => addFieldsToLangs(content, fields)
       updateComponents(updatedContent, componentName, dir)
     }
   })

@@ -1,8 +1,6 @@
-export function getBuilder() {
-  return {
-    importFilePath: {
-      message: 'Json file path to import locales',
-      default: './translations.json'
-    }
+export const BUILDER = {
+  importFilePath: {
+    message: 'Import edilecek çeviri dosyasının yolu',
+    default: './translations.json'
   }
 }

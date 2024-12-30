@@ -16,15 +16,14 @@
     "compare": "src/commands/compare.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "add-field": "node src/commands/addField.js add-field",
-    "add-field-global": "node src/commands/addFieldGlobal.js add-field-global",
-    "add-field-all": "node src/commands/addFieldAll.js add-field-all",
-    "add-locale": "node src/commands/addLocale.js add-locale",
-    "import-locales": "node src/commands/importLocales.js import-locales",
-    "export-locales": "node src/commands/exportLocales.js export-locales",
-    "import-single-locale": "node src/commands/importSingleLocale.js import-single-locale",
-    "compare": "node src/commands/compare.js compare",
+    "add-field": "node src/commands/addField.js",
+    "add-field-global": "node src/commands/addFieldGlobal.js",
+    "add-field-all": "node src/commands/addFieldAll.js",
+    "add-locale": "node src/commands/addLocale.js",
+    "import-locales": "node src/commands/importLocales.js",
+    "export-locales": "node src/commands/exportLocales.js",
+    "import-single-locale": "node src/commands/importSingleLocale.js",
+    "compare": "node src/commands/compare.js",
     "prepare": "husky install"
   },
   "keywords": [

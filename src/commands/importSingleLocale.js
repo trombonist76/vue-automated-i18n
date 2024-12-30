@@ -5,7 +5,7 @@ import { hideBin } from 'yargs/helpers'
 import { input, select } from '@inquirer/prompts'
 
 import { getTranslationsFromJson } from '../utils/import.js'
-import { getBuilder } from '../builders/importSingleLocale.js'
+import { BUILDER } from '../builders/importSingleLocale.js'
 import { updateComponent } from '../utils/component.js'
 import {
   getFallbackLocaleKeys,
@@ -15,12 +15,10 @@ import { deepMerge } from '../utils/deepMerge.js'
 
 yargs(hideBin(process.argv))
   .command({
-    command: 'import-single-locale',
+    command: '*',
     describe:
       'Import translations from given Json file and update components locales',
     handler: async (argv) => {
-      const BUILDER = getBuilder()
-
       const importFilePath = await input(BUILDER.importFilePath)
       const jsonContent = await getTranslationsFromJson(importFilePath)
 

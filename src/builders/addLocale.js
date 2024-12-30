@@ -1,17 +1,14 @@
-export function getBuilder() {
-  return {
-    localeKey: {
-      message: 'The locale key to be added to the components eg. tr',
-      required: true
-    },
-    baseLocaleKey: {
-      message:
-        'The locale key that will serve as the basis for the new locale to be added',
-      default: 'en'
-    },
-    dir: {
-      message: 'Components directory',
-      default: './src'
-    }
+export const BUILDER = {
+  localeKey: {
+    message: 'Yeni eklenecek locale key',
+    required: true
+  },
+  baseLocaleKey: {
+    message: "Hangi locale key'i baz alarak yeni locale eklemek istersiniz?",
+    default: 'en'
+  },
+  dir: {
+    message: "Componentler'in bulunduğu dizin",
+    default: './src'
   }
 }

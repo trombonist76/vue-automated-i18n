@@ -1,16 +1,15 @@
-export function getBuilder() {
-  return {
-    exportFilePath: {
-      message: 'Json file path to export locales',
-      default: 'translations.json'
-    },
-    dir: {
-      message: 'Components directory to export their locales',
-      default: './src'
-    },
-    searchNested: {
-      message: 'Search components in nested folder structure.',
-      default: true
-    }
+export const BUILDER = {
+  exportFilePath: {
+    message: 'Export edilecek çeviri dosyasının yolu',
+    default: 'translations.json'
+  },
+  dir: {
+    message:
+      'Çevirilerini export etmek istediğiniz componentlerin bulunduğu dizin',
+    default: './src'
+  },
+  searchNested: {
+    message: 'Dizin içindeki alt dizinlerde de arama yapmak ister misiniz?',
+    default: true
   }
 }

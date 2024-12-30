@@ -1,21 +1,18 @@
-export function getBuilder(allGlobalLocales) {
-  return {
-    dir: {
-      message:
-        'The directory containing the global locale files where the field will be added',
-      default: 'src/locales/translations'
-    },
-    fieldName: {
-      message: 'Field key',
-      required: true
-    },
-    fieldValue: {
-      message: 'Field description',
-      required: true
-    },
-    selectedLocales: {
-      message: 'The global locale files where the field will be added',
-      required: true
-    }
+export const BUILDER = {
+  dir: {
+    message: 'Global çeviri dosyalarının bulunduğu dizin',
+    default: 'src/locales/translations'
+  },
+  fieldName: {
+    message: "Çevirilere eklenecek field key'i",
+    required: true
+  },
+  fieldValue: {
+    message: 'Çevirilere eklenecek field açıklaması',
+    required: true
+  },
+  selectedLocales: {
+    message: 'Çevirinin ekleneceği global çeviri dosyaları',
+    required: true
   }
 }

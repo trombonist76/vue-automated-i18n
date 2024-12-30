@@ -2,10 +2,7 @@
 import yargs from 'yargs'
 import { checkbox, input } from '@inquirer/prompts'
 import { hideBin } from 'yargs/helpers'
-import { getBuilder } from '../builders/addFieldGlobal.js'
-import { updateComponents } from '../utils/component.js'
-import { addFieldToLangs } from '../utils/addField.js'
-import { getAllFiles, getFileNamesInDir } from '../utils/file.js'
+import { BUILDER } from '../builders/addFieldGlobal.js'
 import {
   addFieldToGlobalLocale,
   globalLocalesToChoices,
@@ -14,10 +11,9 @@ import {
 
 yargs(hideBin(process.argv))
   .command({
-    command: 'add-field-global',
+    command: '*',
     describe: 'Add field to global locales',
     handler: async (argv) => {
-      const BUILDER = getBuilder()
       const dir = await input(BUILDER.dir)
       const localeChoices = await globalLocalesToChoices(dir)
 

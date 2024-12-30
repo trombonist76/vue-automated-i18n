@@ -5,15 +5,13 @@ import { hideBin } from 'yargs/helpers'
 import { input } from '@inquirer/prompts'
 
 import { getTranslationsFromComponents } from '../utils/export.js'
-import { getBuilder } from '../builders/exportLocales.js'
+import { BUILDER } from '../builders/exportLocales.js'
 
 yargs(hideBin(process.argv))
   .command({
-    command: 'export-locales',
+    command: '*',
     describe: 'Export all components translations',
     handler: async (argv) => {
-      const BUILDER = getBuilder()
-
       const exportFilePath = await input(BUILDER.exportFilePath)
       const dir = await input(BUILDER.dir)
       const searchNested = await input(BUILDER.searchNested)

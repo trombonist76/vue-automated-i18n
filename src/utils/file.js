@@ -31,6 +31,6 @@ export async function getFileNamesInDir(
   return getFileNames(files)
 }
 
-export function joinNameWithDir(dir, fileName) {
-  return [dir, fileName].join('/')
+export function joinNameWithDir(dir, fileName, ext = '') {
+  return [dir, fileName].join('/').concat(ext)
 }

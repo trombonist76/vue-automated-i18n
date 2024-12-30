@@ -1,20 +1,28 @@
-export function getBuilder() {
-  return {
-    componentName: {
-      message: 'Component name eg. Customers.vue | Customers',
-      required: true
-    },
-    fieldName: {
-      message: 'Field key which added to each locale.',
-      required: true
-    },
-    fieldValue: {
-      message: 'Field description for given field key',
-      required: true
-    },
-    dir: {
-      message: 'Component directory',
-      default: 'src/components'
+import { select } from '@inquirer/prompts'
+
+export const BUILDER = {
+  componentName: {
+    message: 'Component adı. Customers.vue | Customers',
+    required: true
+  },
+  fieldName: {
+    message: "Çevirilere eklenecek field key'i.",
+    required: true
+  },
+  fieldValue: {
+    message: 'Çevirilere eklenecek field açıklaması.',
+    required: true
+  },
+  dir: {
+    message: "Component'in bulunduğu dizin.",
+    default: 'src/components'
+  },
+  selectedLocales: {
+    message: 'Şimdi yazacağınız çeviri hangi dillere eklenecek?',
+    required: true,
+    loop: false,
+    theme: {
+      prefix: '(Her dil için ayrı ayrı çeviri girebilirsiniz)'
     }
   }
 }
